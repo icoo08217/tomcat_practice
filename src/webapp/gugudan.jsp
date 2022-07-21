@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.ll.exam.Rq"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  %>
+<%@ page import="com.ll.exam.Rq" %>
 <%
     Rq rq = new Rq(request , response);
     int dan = rq.getIntParam("dan", 9);
@@ -10,3 +11,5 @@
 <% for ( int i = 1; i<=limit; i++) {%>
 <div><%=dan%> * <%=i%> = <%=dan * i%></div>
 <% } %>
+
+<h3><%=dan%>단 <%=limit%>까지 출력 종료입니다!</h3>

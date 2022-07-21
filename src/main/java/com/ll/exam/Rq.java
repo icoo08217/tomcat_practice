@@ -43,7 +43,7 @@ public class Rq extends HttpServlet {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
-
+            throw new RuntimeException(e);
         }
     }
 }
