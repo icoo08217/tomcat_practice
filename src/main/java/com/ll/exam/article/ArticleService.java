@@ -12,6 +12,10 @@ public class ArticleService {
         articleRepository = new ArticleRepository();
     }
 
+    public ArticleDto findById(long id) {
+        return articleRepository.findById(id);
+    }
+
     public long write(String title, String body) {
         return articleRepository.write(title, body);
     }
