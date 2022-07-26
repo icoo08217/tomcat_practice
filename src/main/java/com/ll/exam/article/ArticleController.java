@@ -31,4 +31,6 @@ public class ArticleController {
 
         rq.appendBody("%d번 게시물이 생성 되었습니다.".formatted(id));
     }
+
+
 }
