@@ -34,9 +34,6 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/modify":
                         articleController.showModify(rq);
                         break;
-                    case "/usr/article/modify":
-                        articleController.doModify(rq);
-                        break;
                     case "/usr/member/login":
                         memberController.showLogin(rq);
                         break;
@@ -47,6 +44,10 @@ public class DispatchServlet extends HttpServlet {
                 switch (rq.getActionPath()) {
                     case "/usr/article/write":
                         articleController.doWrite(rq);
+                        break;
+
+                    case "/usr/article/modify":
+                        articleController.doModify(rq);
                         break;
                 }
                 break;
