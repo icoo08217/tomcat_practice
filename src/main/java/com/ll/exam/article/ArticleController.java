@@ -40,4 +40,8 @@ public class ArticleController {
         rq.setAttr("article", articleDto);
         rq.view("usr/article/detail");
     }
+
+    public void deleteWrite(Rq rq) {
+
+    }
 }

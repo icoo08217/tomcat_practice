@@ -28,9 +28,13 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/write":
                         articleController.showWrite(rq);
                         break;
+                    case "/usr/article/delete": // 삭제
+                        articleController.deleteWrite(rq);
+                        break;
                     case "/usr/member/login":
                         memberController.showLogin(rq);
                         break;
+
                 }
                 break;
             case "POST":
@@ -40,6 +44,7 @@ public class DispatchServlet extends HttpServlet {
                         break;
                 }
                 break;
+
         }
     }
 
