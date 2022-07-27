@@ -23,4 +23,8 @@ public class ArticleService {
     public List<ArticleDto> findAll() {
         return articleRepository.findAll();
     }
+
+    public void delete(long id) {
+        articleRepository.delete(id);
+    }
 }
