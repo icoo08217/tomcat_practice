@@ -76,6 +76,31 @@ public class Rq {
         return req.getMethod();
     }
 
+    public long getLongPathValueByIndex(int index, long defaultValue) {
+        String value = getPathValueByIndex(index, null);
+
+        if (value == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private String getPathValueByIndex(int index, String defaultValue) {
+        String[] bits = req.getRequestURI().split("/");
+
+        try {
+            return bits[4 + index];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return defaultValue;
+        }
+
+    }
+
     public String getParam(String paramName, String defaultValue) {
         String value = req.getParameter(paramName);
 

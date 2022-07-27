@@ -29,7 +29,7 @@ public class DispatchServlet extends HttpServlet {
                         articleController.showWrite(rq);
                         break;
                     case "/usr/article/delete": // 삭제
-                        articleController.deleteWrite(rq);
+                        articleController.doDelete(rq);
                         break;
                     case "/usr/member/login":
                         memberController.showLogin(rq);
