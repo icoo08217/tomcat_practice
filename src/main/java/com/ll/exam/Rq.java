@@ -39,7 +39,11 @@ public class Rq {
         }
     }
 
-    public void appendBody(String str) {
+    public void println(String str) {
+        print(str + "\n");
+    }
+
+    public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
@@ -111,5 +115,37 @@ public class Rq {
         return value;
     }
 
+    public void historyBack(String msg) {
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
+        }
+
+        println("""
+                <script>
+                history.back();
+                </script>
+                """);
+    }
+
+    public void replace(String uri, String msg) {
+
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
+        }
+
+        println("""
+                <script>
+                location.replace("%s");
+                </script>
+                """.formatted(uri));
+    }
 
 }
