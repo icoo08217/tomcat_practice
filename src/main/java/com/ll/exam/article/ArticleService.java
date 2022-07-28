@@ -5,15 +5,10 @@ import com.ll.exam.article.dto.ArticleDto;
 import java.util.List;
 
 public class ArticleService {
-
     private ArticleRepository articleRepository;
 
     public ArticleService() {
         articleRepository = new ArticleRepository();
-    }
-
-    public ArticleDto findById(long id) {
-        return articleRepository.findById(id);
     }
 
     public long write(String title, String body) {
@@ -22,6 +17,10 @@ public class ArticleService {
 
     public List<ArticleDto> findAll() {
         return articleRepository.findAll();
+    }
+
+    public ArticleDto findById(long id) {
+        return articleRepository.findById(id);
     }
 
     public void delete(long id) {

@@ -25,6 +25,16 @@ public class Rq {
         resp.setContentType("text/html; charset=utf-8");
     }
 
+    public String getParam(String paramName, String defaultValue) {
+        String value = req.getParameter(paramName);
+
+        if (value == null || value.trim().length() == 0) {
+            return defaultValue;
+        }
+
+        return value;
+    }
+
     public int getIntParam(String paramName, int defaultValue) {
         String value = req.getParameter(paramName);
 
@@ -39,10 +49,6 @@ public class Rq {
         }
     }
 
-    public void println(String str) {
-        print(str + "\n");
-    }
-
     public void print(String str) {
         try {
             resp.getWriter().append(str);
@@ -51,11 +57,16 @@ public class Rq {
         }
     }
 
+    public void println(String str) {
+        print(str + "\n");
+    }
+
     public void setAttr(String name, Object value) {
         req.setAttribute(name, value);
     }
 
     public void view(String path) {
+        // gugudan2.jsp 에게 나머지 작업을 토스
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/jsp/" + path + ".jsp");
         try {
             requestDispatcher.forward(req, resp);
@@ -66,17 +77,23 @@ public class Rq {
         }
     }
 
-    public String getPath(){
+    public String getPath() {
         return req.getRequestURI();
     }
 
-    public String getActionPath(){
+    public String getActionPath() {
         String[] bits = req.getRequestURI().split("/");
 
-        return "/%s/%s/%s".formatted(bits[1] , bits[2] , bits[3]);
+        return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
     }
 
-    public String getMethod(){
+    public String getRouteMethod() {
+        String method = getParam("_method", "");
+
+        if (method.length() > 0 ) {
+            return method.toUpperCase();
+        }
+
         return req.getMethod();
     }
 
@@ -94,7 +111,7 @@ public class Rq {
         }
     }
 
-    private String getPathValueByIndex(int index, String defaultValue) {
+    public String getPathValueByIndex(int index, String defaultValue) {
         String[] bits = req.getRequestURI().split("/");
 
         try {
@@ -102,17 +119,22 @@ public class Rq {
         } catch (ArrayIndexOutOfBoundsException e) {
             return defaultValue;
         }
-
     }
 
-    public String getParam(String paramName, String defaultValue) {
-        String value = req.getParameter(paramName);
-
-        if (value == null || value.trim().length() == 0) {
-            return defaultValue;
+    public void replace(String uri, String msg) {
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
         }
 
-        return value;
+        println("""
+                <script>
+                location.replace("%s");
+                </script>
+                """.formatted(uri));
     }
 
     public void historyBack(String msg) {
@@ -130,22 +152,4 @@ public class Rq {
                 </script>
                 """);
     }
-
-    public void replace(String uri, String msg) {
-
-        if (msg != null && msg.trim().length() > 0) {
-            println("""
-                    <script>
-                    alert("%s");
-                    </script>
-                    """.formatted(msg));
-        }
-
-        println("""
-                <script>
-                location.replace("%s");
-                </script>
-                """.formatted(uri));
-    }
-
 }

@@ -18,10 +18,9 @@ public class ArticleRepository {
     }
 
     private static void makeTestData() {
-        IntStream.rangeClosed(1,10).forEach(id -> {
+        IntStream.rangeClosed(1, 10).forEach(id -> {
             String title = "제목%d".formatted(id);
             String body = "내용%d".formatted(id);
-
             write(title, body);
         });
     }
@@ -49,12 +48,10 @@ public class ArticleRepository {
         return null;
     }
 
-    public static void delete(long id) {
+    public void delete(long id) {
         ArticleDto articleDto = findById(id);
 
-        if (articleDto == null) {
-            return;
-        }
+        if (articleDto == null) return;
 
         datum.remove(articleDto);
     }
@@ -62,12 +59,9 @@ public class ArticleRepository {
     public void modify(long id, String title, String body) {
         ArticleDto articleDto = findById(id);
 
-        if (articleDto == null) {
-            return;
-        }
+        if (articleDto == null) return;
 
         articleDto.setTitle(title);
         articleDto.setBody(body);
-
     }
 }
